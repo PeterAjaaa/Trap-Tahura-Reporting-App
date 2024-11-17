@@ -36,7 +36,9 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav me-auto">
-
+                        <li class="nav-item text-success me-3">
+                            {{-- TODO: ADD MENU FOR "BUAT LAPORAN BARU", and "PANTAU LAPORAN" --}}
+                        </li>
                     </ul>
 
                     <!-- Right Side Of Navbar -->
