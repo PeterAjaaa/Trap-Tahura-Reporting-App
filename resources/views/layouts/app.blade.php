@@ -37,7 +37,10 @@
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav me-auto">
                         <li class="nav-item text-success me-3">
-                            {{-- TODO: ADD MENU FOR "BUAT LAPORAN BARU", and "PANTAU LAPORAN" --}}
+                            <a class="nav-link" href="{{ route('reports.index') }}">BUAT LAPORAN BARU</a>
+                        </li>
+                        <li class="nav-item text-success me-3">
+                            <a class="nav-link" href="{{ route('reports.track') }}">LACAK LAPORAN</a>
                         </li>
                     </ul>
 
