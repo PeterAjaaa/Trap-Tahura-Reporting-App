@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Report;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
 
 class ReportController extends Controller
@@ -14,9 +15,19 @@ class ReportController extends Controller
 
     public function track()
     {
-        // $reports = Report::where('user_id', auth()->id())->get();
-        return view('reports.tracking');
+        $reports = Report::where('user_id', auth()->id())->get();
+        return view('reports.tracking', compact('reports'));
     }
+
+    public function showPhoto($id)
+    {
+        $report = Report::findOrFail($id);
+
+        $path = 'reports/photos/' . $report->photo;
+
+        return Storage::disk()->response($path);
+    }
+
     /**
      * Display a listing of the resource.
      */
@@ -38,7 +49,22 @@ class ReportController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'title' => 'required',
+            'type' => 'required',
+            'description' => 'required',
+            'photo' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        ]);
+
+        $photoName = $request->file('photo')->hashName();
+        $request->file('photo')->storeAs('reports/photos', $photoName);
+
+
+        $data = $request->all();
+        $data['photo'] = $photoName;
+        Report::create($data);
+
+        return redirect()->route('reports.track')->with('success', 'Report created successfully!');
     }
 
     /**

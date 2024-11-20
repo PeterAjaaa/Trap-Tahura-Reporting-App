@@ -9,16 +9,16 @@
         </div>
         <div class="row">
             <div class="col-md-12">
-                {{-- TODO: Add action to form --}}
-                <form action="" method="POST" enctype="multipart/form-data">
+                <form action="{{ route('reports.store') }}" method="POST" enctype="multipart/form-data">
+                    <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
                     @csrf
                     <div class="mb-3">
-                        <label for="name" class="form-label">Nama Laporan (Wajib)</label>
-                        <input type="text" class="form-control" id="name" name="name" required>
+                        <label for="title" class="form-label">Nama Laporan (Wajib)</label>
+                        <input type="text" class="form-control" id="title" name="title" required>
                     </div>
                     <div class="mb-3">
-                        <label for="report_type" class="form-label">Jenis Laporan (Wajib)</label>
-                        <select class="form-select" id="report_type" name="report_type" required>
+                        <label for="type" class="form-label">Jenis Laporan (Wajib)</label>
+                        <select class="form-select" id="type" name="type" required>
                             <option value="1">Laporan 1</option>
                         </select>
                     </div>
