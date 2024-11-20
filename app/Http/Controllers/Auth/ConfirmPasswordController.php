@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ConfirmsPasswords;
 
@@ -35,5 +36,19 @@ class ConfirmPasswordController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
+    }
+
+    /**
+     * Override the post-confirmation redirect.
+     *
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    protected function redirectTo()
+    {
+        if (Auth::user() && Auth::user()->role == 'admin') {
+            return route('admin.dashboard');
+        }
+
+        return route('reports.track');
     }
 }

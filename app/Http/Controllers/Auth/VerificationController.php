@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\VerifiesEmails;
 
@@ -37,5 +38,20 @@ class VerificationController extends Controller
         $this->middleware('auth');
         $this->middleware('signed')->only('verify');
         $this->middleware('throttle:6,1')->only('verify', 'resend');
+    }
+
+
+    /**
+     * Override the post-confirmation redirect.
+     *
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    protected function redirectTo()
+    {
+        if (Auth::user() && Auth::user()->role == 'admin') {
+            return route('admin.dashboard');
+        }
+
+        return route('reports.track');
     }
 }

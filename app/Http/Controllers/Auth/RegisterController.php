@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
@@ -68,5 +69,20 @@ class RegisterController extends Controller
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
         ]);
+    }
+
+
+    /**
+     * Override the post-confirmation redirect.
+     *
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    protected function redirectTo()
+    {
+        if (Auth::user() && Auth::user()->role == 'admin') {
+            return route('admin.dashboard');
+        }
+
+        return route('reports.track');
     }
 }

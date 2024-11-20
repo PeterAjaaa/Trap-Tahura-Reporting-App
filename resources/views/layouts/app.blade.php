@@ -23,7 +23,8 @@
         <nav class="navbar navbar-expand-md shadow-sm">
             <div class="container">
                 <strong>
-                    <a class="navbar-brand text-success" href="{{ url('/') }}">
+                    <a class="navbar-brand text-success"
+                        href="{{ auth()->user() && auth()->user()->role == 'admin' ? route('admin.dashboard') : route('reports.track') }}">
                         {{ config('app.name', 'Laravel') }}
                     </a>
                 </strong>
