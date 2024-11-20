@@ -20,7 +20,7 @@
                             <th class="text-center">ID</th>
                             <th class="text-center">Status</th>
                             <th class="text-center">Aksi</th>
-                            <th class="text-center">Image</th>
+                            <th class="text-center">Bukti Foto</th>
                         </tr>
                     </thead>
                     <tbody>
