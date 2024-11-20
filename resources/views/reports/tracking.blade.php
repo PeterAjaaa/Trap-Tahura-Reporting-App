@@ -19,8 +19,8 @@
                         <tr>
                             <th class="text-center text-success">ID</th>
                             <th class="text-center text-success">Status</th>
-                            <th class="text-center text-success">Aksi</th>
                             <th class="text-center text-success">Bukti Foto</th>
+                            <th class="text-center text-success">Pesan Laporan Oleh Petugas</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -28,13 +28,12 @@
                             <tr>
                                 <td class="text-center">{{ $report->id }}</td>
                                 <td class="text-center">{{ $report->status }}</td>
-                                {{-- <td>
-                                    <a href="{{ route('reports.show', $report->id) }}" class="btn btn-primary">Lihat</a>
-                                </td> --}}
-                                <td>PLACEHOLDER</td>
                                 <td class="text-center">
                                     <img src="{{ route('reports.photo.show', ['id' => $report->id]) }}"
                                         class="img-thumbnail w-25" alt="Report Photo">
+                                </td>
+                                <td>
+                                    PLACEHOLDER
                                 </td>
                             </tr>
                         @endforeach
