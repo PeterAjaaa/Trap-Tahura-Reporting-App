@@ -11,6 +11,12 @@ class ReportController extends Controller
     {
         $this->middleware('auth');
     }
+
+    public function track()
+    {
+        // $reports = Report::where('user_id', auth()->id())->get();
+        return view('reports.tracking');
+    }
     /**
      * Display a listing of the resource.
      */
