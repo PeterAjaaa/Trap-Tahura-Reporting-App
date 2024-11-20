@@ -17,6 +17,11 @@ class User extends Authenticatable
         return $this->hasMany(Report::class);
     }
 
+    public function handledReports()
+    {
+        return $this->hasMany(Report::class, 'admin_id');
+    }
+
     /**
      * The attributes that are mass assignable.
      *
