@@ -7,7 +7,10 @@ use Illuminate\Http\Request;
 
 class ReportController extends Controller
 {
-    // TODO: Add authorization
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     /**
      * Display a listing of the resource.
      */
