@@ -19,7 +19,11 @@
                     <div class="mb-3">
                         <label for="type" class="form-label">Jenis Laporan (Wajib)</label>
                         <select class="form-select" id="type" name="type" required>
-                            <option value="1">Laporan 1</option>
+                            <option value="Perbaikan">Perbaikan dan Pemeliharaan</option>
+                            <option value="Komplain">Komplain dan Pengaduan</option>
+                            <option value="Ketidaksesuaian">Ketidaksesuaian Prosedur</option>
+                            <option value="Bahaya">Kebahayaan (Lokasi, Lingkungan, Atau Kerusakan)</option>
+                            <option value="Emergency">Emergency</option>
                         </select>
                     </div>
                     <div class="mb-3">

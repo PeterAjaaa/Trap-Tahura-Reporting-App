@@ -17,10 +17,10 @@
                 <table class="table">
                     <thead>
                         <tr>
-                            <th class="text-center">ID</th>
-                            <th class="text-center">Status</th>
-                            <th class="text-center">Aksi</th>
-                            <th class="text-center">Bukti Foto</th>
+                            <th class="text-center text-success">ID</th>
+                            <th class="text-center text-success">Status</th>
+                            <th class="text-center text-success">Aksi</th>
+                            <th class="text-center text-success">Bukti Foto</th>
                         </tr>
                     </thead>
                     <tbody>
