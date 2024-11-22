@@ -15,6 +15,7 @@
                             <th scope="col" class="text-center">ID Laporan</th>
                             <th scope="col" class="text-center">Judul Laporan</th>
                             <th scope="col" class="text-center">Tipe Laporan</th>
+                            <th scope="col" class="text-center">Prioritas Laporan</th>
                             <th scope="col" class="text-center">Deskripsi Laporan</th>
                             <th scope="col" class="text-center">Status Laporan</th>
                             <th scope="col" class="text-center">Foto Laporan</th>
