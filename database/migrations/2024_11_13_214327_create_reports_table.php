@@ -18,8 +18,6 @@ return new class extends Migration
             $table->string('description');
             $table->string('status')->default('pending');
             $table->string('photo');
-            $table->unsignedBigInteger('user_id');
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->unsignedBigInteger('admin_id')->nullable();
             $table->foreign('admin_id')->references('id')->on('users')->onDelete('set null');
             $table->timestamps();

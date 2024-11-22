@@ -48,10 +48,6 @@ class VerificationController extends Controller
      */
     protected function redirectTo()
     {
-        if (Auth::user() && Auth::user()->role == 'admin') {
-            return route('admin.dashboard');
-        }
-
-        return route('reports.track');
+        return route('admin.dashboard');
     }
 }

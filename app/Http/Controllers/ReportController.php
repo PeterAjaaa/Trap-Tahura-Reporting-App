@@ -8,16 +8,6 @@ use Illuminate\Http\Request;
 
 class ReportController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
-
-    public function track()
-    {
-        $reports = Report::where('user_id', auth()->id())->get();
-        return view('reports.tracking', compact('reports'));
-    }
 
     public function showPhoto($id)
     {
