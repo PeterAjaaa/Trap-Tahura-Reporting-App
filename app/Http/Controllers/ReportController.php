@@ -9,6 +9,8 @@ use Illuminate\Http\Request;
 class ReportController extends Controller
 {
 
+    public function showSharedReport($token) {}
+
     public function showPhoto($id)
     {
         $report = Report::findOrFail($id);
@@ -52,17 +54,23 @@ class ReportController extends Controller
 
         $data = $request->all();
         $data['photo'] = $photoName;
-        Report::create($data);
+        $report = Report::create($data);
 
-        return redirect()->route('reports.track')->with('success', 'Report created successfully!');
+        return redirect()->route('reports.share', ['token' => $report->shareable_token])->with('success', 'Report created successfully!');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Report $report)
+    public function show($token)
     {
-        //
+        $report = Report::where('shareable_token', $token)->first();
+
+        if (!$report) {
+            abort(404, 'Report not found');
+        }
+
+        return view('reports.tracking', ['report' => $report]);
     }
 
     /**
