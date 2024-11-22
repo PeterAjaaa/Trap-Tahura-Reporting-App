@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Report;
+use App\Models\User;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
 
@@ -16,6 +17,21 @@ class ReportController extends Controller
         $path = 'reports/photos/' . $report->photo;
 
         return Storage::disk()->response($path);
+    }
+
+
+    public function assignReportsAutomatically($report)
+    {
+        $admin = User::withCount('assignedReports')
+            ->orderBy('assigned_reports_count', 'asc')
+            ->first();
+
+        if ($admin) {
+            $report->update([
+                'admin_id' => $admin->id,
+                'status' => 'Assigned',
+            ]);
+        }
     }
 
     /**
@@ -40,22 +56,25 @@ class ReportController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'title' => 'required',
-            'type' => 'required',
+            'title' => 'required|string|max:255',
+            'type' => 'required|string',
             'description' => 'required',
-            'photo' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'photo' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
         if ($request->hasFile('photo')) {
             $photoName = $request->file('photo')->hashName();
             $request->file('photo')->storeAs('reports/photos', $photoName);
             $data = $request->all();
+            $data['priority'] = Report::getPriority($request->input('type'));
             $data['photo'] = $photoName;
         } else {
             $data = $request->all();
+            $data['priority'] = Report::getPriority($request->input('type'));
         }
 
         $report = Report::create($data);
+        $this->assignReportsAutomatically($report);
 
         return redirect()->route('reports.share', ['token' => $report->shareable_token])->with('success', 'Report created successfully!');
     }

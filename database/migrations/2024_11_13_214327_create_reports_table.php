@@ -15,8 +15,9 @@ return new class extends Migration
             $table->id();
             $table->string('title');
             $table->string('type');
+            $table->unsignedTinyInteger('priority');
             $table->string('description');
-            $table->string('status')->default('Pending');
+            $table->enum('status', ['Pending', 'Assigned', 'Resolved'])->default('Pending');
             $table->string('photo')->nullable();
             $table->string('shareable_token')->unique()->nullable();
             $table->unsignedBigInteger('admin_id')->nullable();

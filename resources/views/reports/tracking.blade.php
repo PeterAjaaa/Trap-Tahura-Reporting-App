@@ -33,6 +33,11 @@
                     <p class="text-center">Status Laporan: {{ $report->status }}</p>
                 </strong>
             </div>
+            <div class="col-md-12 d-flex justify-content-start mb-3">
+                <strong>
+                    <p class="text-center">Admin Laporan: {{ $report->assignedAdmin->name }}</p>
+                </strong>
+            </div>
             <div class="col-md-12 d-flex justify-content-center mb-3">
                 <strong>
                     <p class="text-center">Foto Laporan:</p>

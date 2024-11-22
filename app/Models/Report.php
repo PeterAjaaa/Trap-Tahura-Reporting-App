@@ -17,11 +17,32 @@ class Report extends Model
         });
     }
 
+
+    public function assignedAdmin()
+    {
+        return $this->belongsTo(User::class, 'admin_id');
+    }
+
+    public static function getPriority($type)
+    {
+        $priorities = [
+            'Emergency' => 5,
+            'Kebahayaan (Lokasi, Lingkungan, Atau Kerusakan)' => 4,
+            'Ketidaksesuaian Prosedur' => 3,
+            'Komplain dan Pengaduan' => 2,
+            'Perbaikan dan Pemeliharaan' => 1,
+        ];
+
+        return $priorities[$type] ?? 1;
+    }
+
     protected $fillable = [
         'title',
         'type',
+        'priority',
         'description',
         'photo',
         'status',
+        'admin_id',
     ];
 }

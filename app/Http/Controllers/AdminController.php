@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Models\Report;
 
 class AdminController extends Controller
 {
@@ -11,6 +11,10 @@ class AdminController extends Controller
      */
     public function index()
     {
-        return view('admin.dashboard');
+        $reports = Report::where('admin_id', auth()->id())
+            ->orderBy('priority', 'desc')
+            ->get();
+
+        return view('admin.dashboard', compact('reports'));
     }
 }
