@@ -10,7 +10,6 @@
         <div class="row">
             <div class="col-md-12">
                 <form action="{{ route('reports.store') }}" method="POST" enctype="multipart/form-data">
-                    <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
                     @csrf
                     <div class="mb-3">
                         <label for="title" class="form-label">Nama Laporan (Wajib)</label>
