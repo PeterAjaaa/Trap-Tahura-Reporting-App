@@ -9,8 +9,6 @@ use Illuminate\Http\Request;
 class ReportController extends Controller
 {
 
-    public function showSharedReport($token) {}
-
     public function showPhoto($id)
     {
         $report = Report::find($id);
