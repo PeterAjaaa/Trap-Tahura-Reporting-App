@@ -13,7 +13,7 @@ class ReportController extends Controller
 
     public function showPhoto($id)
     {
-        $report = Report::findOrFail($id);
+        $report = Report::find($id);
 
         $path = 'reports/photos/' . $report->photo;
 
@@ -45,15 +45,18 @@ class ReportController extends Controller
             'title' => 'required',
             'type' => 'required',
             'description' => 'required',
-            'photo' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'photo' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
-        $photoName = $request->file('photo')->hashName();
-        $request->file('photo')->storeAs('reports/photos', $photoName);
+        if ($request->hasFile('photo')) {
+            $photoName = $request->file('photo')->hashName();
+            $request->file('photo')->storeAs('reports/photos', $photoName);
+            $data = $request->all();
+            $data['photo'] = $photoName;
+        } else {
+            $data = $request->all();
+        }
 
-
-        $data = $request->all();
-        $data['photo'] = $photoName;
         $report = Report::create($data);
 
         return redirect()->route('reports.share', ['token' => $report->shareable_token])->with('success', 'Report created successfully!');

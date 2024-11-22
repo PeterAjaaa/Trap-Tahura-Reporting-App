@@ -18,10 +18,11 @@
                     <div class="mb-3">
                         <label for="type" class="form-label">Jenis Laporan (Wajib)</label>
                         <select class="form-select" id="type" name="type" required>
-                            <option value="Perbaikan">Perbaikan dan Pemeliharaan</option>
-                            <option value="Komplain">Komplain dan Pengaduan</option>
-                            <option value="Ketidaksesuaian">Ketidaksesuaian Prosedur</option>
-                            <option value="Bahaya">Kebahayaan (Lokasi, Lingkungan, Atau Kerusakan)</option>
+                            <option value="Perbaikan dan Pemeliharaan">Perbaikan dan Pemeliharaan</option>
+                            <option value="Komplain dan Pengaduan">Komplain dan Pengaduan</option>
+                            <option value="Ketidaksesuaian Prosedur">Ketidaksesuaian Prosedur</option>
+                            <option value="Kebahayaan (Lokasi, Lingkungan, Atau Kerusakan)">Kebahayaan (Lokasi, Lingkungan,
+                                Atau Kerusakan)</option>
                             <option value="Emergency">Emergency</option>
                         </select>
                     </div>
@@ -30,8 +31,8 @@
                         <textarea class="form-control" id="description" name="description" required></textarea>
                     </div>
                     <div class="mb-3">
-                        <label for="photo" class="form-label">Upload Foto Laporan (Wajib)</label>
-                        <input type="file" class="form-control" id="photo" name="photo" accept="image/*" required>
+                        <label for="photo" class="form-label">Upload Foto Laporan</label>
+                        <input type="file" class="form-control" id="photo" name="photo" accept="image/*">
                     </div>
                     <div class="d-grid col-6 mx-auto">
                         <button type="submit" class="btn btn-success">Submit</button>

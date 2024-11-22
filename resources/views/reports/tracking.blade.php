@@ -39,8 +39,16 @@
                 </strong>
             </div>
             <div class="col-md-12 d-flex justify-content-center mb-3">
-                <img src="{{ route('reports.photo.show', $report->id) }}" alt="Foto Laporan"
-                    class="img-fluid img-thumbnail vw-25">
+                @if ($report->photo)
+                    <img src="{{ route('reports.photo.show', $report->id) }}" alt="Foto Laporan"
+                        class="img-fluid img-thumbnail vw-25">
+                @else
+                    <strong>
+                        <p>
+                            Foto Laporan Tidak Tersedia
+                        </p>
+                    </strong>
+                @endif
             </div>
         </div>
     </div>

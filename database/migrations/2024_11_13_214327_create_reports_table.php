@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('type');
             $table->string('description');
             $table->string('status')->default('Pending');
-            $table->string('photo');
+            $table->string('photo')->nullable();
             $table->string('shareable_token')->unique()->nullable();
             $table->unsignedBigInteger('admin_id')->nullable();
             $table->foreign('admin_id')->references('id')->on('users')->onDelete('set null');
