@@ -17,11 +17,11 @@
                             @csrf
 
                             <div class="row mb-3">
-                                <label for="email"
+                                <label for="login_id"
                                     class="col-md-4 col-form-label text-md-end">{{ __('Login ID') }}</label>
 
                                 <div class="col-md-6">
-                                    <input id="text" type="text" class="form-control name="login_id"
+                                    <input id="text" type="text" class="form-control" name="login_id"
                                         value="{{ old('login_id') }}" required autofocus>
                                 </div>
                             </div>
