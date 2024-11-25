@@ -44,6 +44,21 @@
                         </ul>
                     </div>
                 @endguest
+                @auth
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <!-- Left Side Of Navbar -->
+                        <ul class="navbar-nav me-auto">
+                            <li class="nav-item text-success me-3">
+                                <a class="nav-link" href="{{ route('admin.dashboard') }}">Dashboard</a>
+                            </li>
+                            @if (auth()->user()->role == 'master')
+                                <li class="nav-item text-success me-3">
+                                    <a class="nav-link" href="{{ route('master.admin.create') }}">Add New Admin</a>
+                                </li>
+                            @endif
+                        </ul>
+                    </div>
+                @endauth
 
                 <!-- Right Side Of Navbar -->
                 <ul class="navbar-nav ms-auto">

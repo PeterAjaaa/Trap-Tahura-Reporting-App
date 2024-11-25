@@ -18,6 +18,7 @@ class DatabaseSeeder extends Seeder
             'name' => 'Tahura Admin Master',
             'login_id' => 'tahuraadminlogin',
             'password' => Hash::make('tahuraadminpassword'),
+            'role' => 'master',
         ]);
     }
 }
