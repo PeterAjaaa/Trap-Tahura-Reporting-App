@@ -10,6 +10,19 @@ use Illuminate\Http\Request;
 class ReportController extends Controller
 {
 
+
+    public function updateStatus(Request $request, $id)
+    {
+        $request->validate([
+            'status' => 'required|string|in:Pending,Assigned,In Progress,Resolved,Closed',
+        ]);
+
+        $report = Report::findOrFail($id);
+        $report->status = $request->input('status');
+        $report->save();
+
+        return redirect()->back()->with('success', 'Report status updated successfully!');
+    }
     public function showPhoto($id)
     {
         $report = Report::find($id);
