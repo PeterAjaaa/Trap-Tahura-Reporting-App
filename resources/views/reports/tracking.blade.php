@@ -6,6 +6,27 @@
             {{ session('success') }}
         </div>
     @endif
+
+    <script>
+        function copyCurrentURL() {
+            const currentURL = window.location.href;
+
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText(currentURL)
+                    .then(() => alert('Current URL copied to clipboard!'))
+                    .catch(() => alert('Failed to copy URL.'));
+            } else {
+                const tempInput = document.createElement('input');
+                tempInput.value = currentURL;
+                document.body.appendChild(tempInput);
+                tempInput.select();
+                tempInput.setSelectionRange(0, 99999);
+                document.execCommand('copy');
+                document.body.removeChild(tempInput);
+                alert('Current URL copied to clipboard (using fallback)!');
+            }
+        }
+    </script>
     <div class="container">
         <div class="row">
             <div class="col-md-12 d-flex justify-content-start mb-3">
@@ -54,6 +75,9 @@
                         </p>
                     </strong>
                 @endif
+            </div>
+            <div class="col-md-12 d-flex justify-content-center mb-3">
+                <button class="btn btn-success" onclick="copyCurrentURL()">Copy Link</button>
             </div>
         </div>
     </div>
