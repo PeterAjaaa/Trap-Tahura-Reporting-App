@@ -83,7 +83,8 @@
             <div class="col-12 d-flex justify-content-center mb-3">
                 <strong>
                     <p class="text-center text-danger">
-                        Jika Anda ingin menutup laporan lebih awal, klik tombol "Close Report"
+                        Jika Anda ingin menutup laporan lebih awal, klik tombol "Close Report". Hal ini tidak bisa
+                        dibatalkan.
                     </p>
                 </strong>
             </div>
