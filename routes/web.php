@@ -21,8 +21,5 @@ Route::patch('/reports/{report}/status', [App\Http\Controllers\ReportController:
 
 Route::get('/admin/dashboard', [App\Http\Controllers\AdminController::class, 'index'])->name('admin.dashboard');
 
-
-Route::middleware(['web'])->group(function () {
-    Route::get('/master/add', [App\Http\Controllers\AdminController::class, 'createNewAdmin'])->name('master.admin.create');
-    Route::post('/master/store', [App\Http\Controllers\AdminController::class, 'saveNewAdmin'])->name('master.admin.store');
-});
+Route::get('/master/add', [App\Http\Controllers\AdminController::class, 'createNewAdmin'])->name('master.admin.create');
+Route::post('/master/store', [App\Http\Controllers\AdminController::class, 'saveNewAdmin'])->name('master.admin.store');
