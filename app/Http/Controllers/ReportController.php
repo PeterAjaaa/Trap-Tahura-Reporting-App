@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\ReportCreated;
+
 use App\Models\Report;
 use App\Models\User;
 
@@ -88,6 +90,7 @@ class ReportController extends Controller
 
         $report = Report::create($data);
         $this->assignReportsAutomatically($report);
+        event(new ReportCreated($report));
 
         return redirect()->route('reports.share', ['token' => $report->shareable_token])->with('success', 'Report created successfully!');
     }

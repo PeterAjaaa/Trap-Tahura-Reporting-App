@@ -23,3 +23,9 @@ Route::get('/admin/dashboard', [App\Http\Controllers\AdminController::class, 'in
 
 Route::get('/master/add', [App\Http\Controllers\AdminController::class, 'createNewAdmin'])->name('master.admin.create');
 Route::post('/master/store', [App\Http\Controllers\AdminController::class, 'saveNewAdmin'])->name('master.admin.store');
+
+
+Route::get('/test-broadcast', function () {
+    event(new App\Events\ReportCreated(App\Models\Report::first()));
+    return 'Broadcast test triggered!';
+});

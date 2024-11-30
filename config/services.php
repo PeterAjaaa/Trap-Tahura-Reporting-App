@@ -34,5 +34,15 @@ return [
             'channel' => env('SLACK_BOT_USER_DEFAULT_CHANNEL'),
         ],
     ],
+    'pusher' => [
+        'driver' => 'pusher',
+        'key' => env('PUSHER_APP_KEY'),
+        'secret' => env('PUSHER_APP_SECRET'),
+        'app_id' => env('PUSHER_APP_ID'),
+        // 'cluster' => env('PUSHER_APP_CLUSTER'),
+        'cluster' => 'ap1',
+        // 'encrypted' => true,
+        'encrypted' => false,
+    ],
 
 ];
