@@ -78,7 +78,7 @@ document.addEventListener('DOMContentLoaded', () => {
                                         </option>
                                     `).join('')}
                             </select>
-                            <button type="submit" class="btn btn-primary btn-sm">Update</button>
+                            <button type="submit" class="btn btn-success btn-sm">Update</button>
                         </form>
                     </td>
                     <td class="photo-cell">

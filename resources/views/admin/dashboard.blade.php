@@ -66,7 +66,7 @@
                                             <option value="Closed" {{ $report->status == 'Closed' ? 'selected' : '' }}>
                                                 Closed</option>
                                         </select>
-                                        <button type="submit" class="btn btn-primary btn-sm">Update</button>
+                                        <button type="submit" class="btn btn-success btn-sm">Update</button>
                                     </form>
                                 </td>
                                 <td class="photo-cell">
