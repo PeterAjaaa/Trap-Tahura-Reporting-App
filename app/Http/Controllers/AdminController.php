@@ -22,9 +22,16 @@ class AdminController extends Controller
     {
         $reports = Report::where('admin_id', auth()->id())
             ->orderBy('priority', 'desc')
-            ->get();
+            ->orderBy('created_at', 'desc')
+            ->get()
+            ->groupBy(function ($report) {
+                return $report->status === 'Closed' ? 'Closed' : 'Active';
+            });
 
-        return view('admin.dashboard', compact('reports'));
+        return view('admin.dashboard', [
+            'activeReports' => $reports['Active'] ?? collect(),
+            'closedReports' => $reports['Closed'] ?? collect(),
+        ]);
     }
 
     public function createNewAdmin()

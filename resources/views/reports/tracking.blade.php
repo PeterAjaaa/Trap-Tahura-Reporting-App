@@ -1,12 +1,15 @@
 @extends('layouts.app')
 
 @section('content')
+    <meta name="report-id" content="{{ $report->id }}">
+    <meta name="user-id" content="{{ Auth::id() }}">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+
     @if (session('success'))
         <div class="alert alert-success">
             {{ session('success') }}
         </div>
     @endif
-
     <script>
         function copyCurrentURL() {
             const currentURL = window.location.href;
@@ -51,7 +54,7 @@
             </div>
             <div class="col-6 d-flex justify-content-start mb-3">
                 <strong>
-                    <p class="text-center">Status Laporan: {{ $report->status }}</p>
+                    <p class="text-center report-status-display">Status Laporan: {{ $report->status }}</p>
                 </strong>
             </div>
             <div class="col-6 d-flex justify-content-start mb-3">
@@ -89,10 +92,9 @@
                 </strong>
             </div>
             <div class="col-12 d-flex justify-content-center mb-3">
-                <form action="{{ route('reports.update.status', $report->id) }}" method="POST">
+                <form action="{{ route('reports.close', $report->id) }}" method="POST">
                     @csrf
                     @method('PATCH')
-                    <input type="hidden" name="status" value="Closed">
                     <button type="submit" class="btn btn-danger btn-sm">Close Report</button>
                 </form>
             </div>

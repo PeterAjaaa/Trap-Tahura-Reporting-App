@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Events\ReportCreated;
+use App\Events\ReportClosed;
 
 use App\Models\Report;
 use App\Models\User;
@@ -25,6 +26,19 @@ class ReportController extends Controller
 
         return redirect()->back()->with('success', 'Report status updated successfully!');
     }
+
+
+    public function closeReport($id)
+    {
+        $report = Report::findOrFail($id);
+        $report->status = 'Closed';
+        $report->save();
+
+        event(new ReportClosed($report));
+
+        return redirect()->back()->with('success', 'Report closed successfully.');
+    }
+
     public function showPhoto($id)
     {
         $report = Report::find($id);

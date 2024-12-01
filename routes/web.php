@@ -18,6 +18,7 @@ Route::get('/report/photo/{id}', [App\Http\Controllers\ReportController::class, 
 Route::get('/report/track/{token}', [App\Http\Controllers\ReportController::class, 'show'])->name('reports.share');
 Route::post('/report/store', [App\Http\Controllers\ReportController::class, 'store'])->name('reports.store');
 Route::patch('/reports/{report}/status', [App\Http\Controllers\ReportController::class, 'updateStatus'])->name('reports.update.status');
+Route::patch('/reports/{report}/close', [App\Http\Controllers\ReportController::class, 'closeReport'])->name('reports.close');
 
 Route::get('/admin/dashboard', [App\Http\Controllers\AdminController::class, 'index'])->name('admin.dashboard');
 
