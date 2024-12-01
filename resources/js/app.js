@@ -83,7 +83,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     </td>
                     <td class="photo-cell">
                         ${event.photo
-                        ? `<img src="${event.photo}" alt="Report Photo" class="img-fluid img-thumbnail">`
+                        ? `<img src="${window.location.origin}/report/photo/${safeValue(event.id)}" alt="Foto Laporan" class="img-fluid img-thumbnail vw-25">`
                         : 'No Photo Available'}
                     </td>
                 `;

@@ -35,7 +35,9 @@ class ReportCreated implements ShouldBroadcastNow
             'priority' => $this->report->priority,
             'status' => $this->report->status,
             'description' => $this->report->description,
-            'photo' => $this->report->photo ? url($this->report->photo) : null,
+            'photo' => $this->report->photo
+                ? route('reports.photo.show', $this->report->id)
+                : null,
         ];
     }
 }
