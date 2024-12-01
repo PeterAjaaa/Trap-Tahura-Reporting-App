@@ -134,35 +134,71 @@ document.addEventListener('DOMContentLoaded', () => {
                     }
                 }
                 const insertClosedRows = (tbody) => {
+                    // Find all closed rows
                     const closedRows = Array.from(tbody.querySelectorAll('tr')).filter(row =>
                         row.querySelector('.status-cell')?.textContent === 'Closed'
                     );
 
                     // Prioritization logic for closed rows
                     const prioritySort = (a, b) => {
-                        const priorityA = parseInt(a.querySelector('.priority-cell .badge')?.textContent || '0');
-                        const priorityB = parseInt(b.querySelector('.priority-cell .badge')?.textContent || '0 ');
-                        return priorityB - priorityA; // Descending order
+                        const getPriority = (row) => {
+                            const badge = row.querySelector('.priority-cell .badge');
+                            return badge ? parseInt(badge.textContent) : 0;
+                        };
+                        return getPriority(b) - getPriority(a); // Descending order
                     };
 
-                    // Combine existing closed rows with the new row
+                    // Sort closed rows by priority
                     const sortedClosedRows = closedRows.sort(prioritySort);
 
-                    // Clear existing closed rows from the table
-                    closedRows.forEach(row => row.remove());
+                    // Find or create separator row
+                    let separatorRow = tbody.querySelector('tr.separator-row');
+                    if (!separatorRow && sortedClosedRows.length > 0) {
+                        separatorRow = document.createElement('tr');
+                        separatorRow.classList.add('separator-row');
+                        separatorRow.innerHTML = `
+            <td colspan="8" class="text-center bg-secondary text-white">
+                Laporan Ditutup
+            </td>
+        `;
+                    }
 
-                    // Reinsert sorted closed rows
-                    sortedClosedRows.forEach(row => {
-                        const separatorRow = tbody.querySelector('tr.separator-row');
-                        if (separatorRow) {
-                            tbody.insertBefore(row, separatorRow);
+                    // Remove existing closed rows and separator
+                    closedRows.forEach(row => row.remove());
+                    if (separatorRow && separatorRow.parentElement) {
+                        separatorRow.remove();
+                    }
+
+                    // Reinsert separator and sorted closed rows
+                    if (sortedClosedRows.length > 0) {
+                        // Find the last active row
+                        const activeRows = Array.from(tbody.querySelectorAll('tr'))
+                            .filter(row => row.querySelector('.status-cell')?.textContent !== 'Closed');
+
+                        const lastActiveRow = activeRows[activeRows.length - 1];
+
+                        if (lastActiveRow) {
+                            // Insert separator after last active row
+                            tbody.insertBefore(separatorRow, lastActiveRow.nextSibling);
+
+                            // Insert sorted closed rows after separator
+                            sortedClosedRows.forEach(row => {
+                                tbody.appendChild(row);
+                            });
                         } else {
-                            tbody.appendChild(row);
+                            // If no active rows, just append separator and closed rows
+                            tbody.appendChild(separatorRow);
+                            sortedClosedRows.forEach(row => {
+                                tbody.appendChild(row);
+                            });
                         }
-                    });
+                    }
                 };
                 // Call the function to prioritize closed rows
-                insertClosedRows(tbody);
+                const tbody = row.closest('tbody');
+                if (tbody) {
+                    insertClosedRows(tbody);
+                }
             })
 
             .listen('ReportCreated', (event) => {
