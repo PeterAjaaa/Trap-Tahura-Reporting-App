@@ -46,6 +46,8 @@ class ReportController extends Controller
                 'admin_id' => $admin->id,
                 'status' => 'Assigned',
             ]);
+
+            event(new ReportCreated($report));
         }
     }
 
@@ -90,7 +92,6 @@ class ReportController extends Controller
 
         $report = Report::create($data);
         $this->assignReportsAutomatically($report);
-        event(new ReportCreated($report));
 
         return redirect()->route('reports.share', ['token' => $report->shareable_token])->with('success', 'Report created successfully!');
     }

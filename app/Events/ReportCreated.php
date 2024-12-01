@@ -38,6 +38,7 @@ class ReportCreated implements ShouldBroadcastNow
             'photo' => $this->report->photo
                 ? route('reports.photo.show', $this->report->id)
                 : null,
+            'admin_id' => $this->report->admin_id, // Add this line
         ];
     }
 }

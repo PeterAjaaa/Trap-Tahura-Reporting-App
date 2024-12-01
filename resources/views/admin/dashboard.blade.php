@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
+    <meta name="user-id" content="{{ Auth::id() }}">
     <div class="container">
         @if (session('success'))
             <div class="alert alert-success alert-dismissible fade show" role="alert">

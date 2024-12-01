@@ -13,13 +13,29 @@ window.Echo = new Echo({
 
 document.addEventListener('DOMContentLoaded', () => {
     try {
+        // Get current user ID from meta tag
+        const currentUserId = document.querySelector('meta[name="user-id"]')?.getAttribute('content');
+
         window.Echo.channel('reports')
             .listen('ReportCreated', (event) => {
                 console.log('Report Created Event Received:', event);
 
-                // Validate required data
-                if (!event || !event.id) {
-                    console.error('Invalid report data', event);
+
+                // Get current user ID from meta tag
+                const currentUserId = document.querySelector('meta[name="user-id"]')?.getAttribute('content');
+
+                if (!currentUserId ||
+                    !event ||
+                    !event.id ||
+                    !event.admin_id ||
+                    event.admin_id.toString() !== currentUserId) {
+                    console.log('Report not assigned to current user');
+                    return;
+                }
+
+                // Validate user assignment and required data
+                if (!currentUserId || !event || !event.id || event.admin_id !== parseInt(currentUserId)) {
+                    console.log('Report not assigned to current user');
                     return;
                 }
 
@@ -83,7 +99,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     </td>
                     <td class="photo-cell">
                         ${event.photo
-                        ? `<img src="${window.location.origin}/report/photo/${safeValue(event.id)}" alt="Foto Laporan" class="img-fluid img-thumbnail vw-25">`
+                        ? `<img src="${event.photo}" alt="Foto Laporan" class="img-fluid img-thumbnail vw-25">`
                         : 'No Photo Available'}
                     </td>
                 `;
