@@ -12,6 +12,64 @@ window.Echo = new Echo({
 });
 
 document.addEventListener('DOMContentLoaded', () => {
+    function enterFullscreen() {
+        const element = document.documentElement;
+
+        // Multiple browser-specific methods
+        const fullscreenMethods = [
+            'requestFullscreen',
+            'webkitRequestFullscreen',
+            'mozRequestFullScreen',
+            'msRequestFullscreen'
+        ];
+
+        for (let method of fullscreenMethods) {
+            if (element[method]) {
+                try {
+                    element[method]();
+                    console.log(`Fullscreen entered using ${method}`);
+                    return true;
+                } catch (error) {
+                    console.warn(`Fullscreen method ${method} failed:`, error);
+                }
+            }
+        }
+
+        return false;
+    }
+
+    // Comprehensive Fullscreen Strategy
+    function initFullscreenStrategy() {
+        // Multiple trigger points
+        function tryFullscreen() {
+            if (!document.fullscreenElement) {
+                enterFullscreen();
+            }
+        }
+
+        // Immediate attempts
+        tryFullscreen();
+
+        // Delayed attempts
+        const delays = [100, 500, 1000];
+        delays.forEach(delay => {
+            setTimeout(tryFullscreen, delay);
+        });
+
+        // Event-based triggers
+        window.addEventListener('load', tryFullscreen);
+        document.addEventListener('DOMContentLoaded', tryFullscreen);
+    }
+
+    // Initialize on script load
+    document.addEventListener('DOMContentLoaded', initFullscreenStrategy);
+
+    // Fallback: Force on first user interaction
+    document.addEventListener('click', function firstInteractionHandler() {
+        enterFullscreen();
+        document.removeEventListener('click', firstInteractionHandler);
+    });
+
     try {
         window.Echo.channel('reports')
             .listen('ReportClosed', (event) => {
